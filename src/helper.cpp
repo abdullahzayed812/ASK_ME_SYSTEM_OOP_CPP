@@ -74,3 +74,21 @@ void Helper::writeFileLines(const std::vector<std::string>& lines, const std::st
 
   fileHandler.close();
 }
+
+std::vector<std::string> Helper::splitStringLine(const std::string& line,
+                                                 const std::string& delimiter) {
+  std::string copy = line;
+  std::vector<std::string> result;
+
+  int pos = 0;
+  std::string substr;
+
+  while ((pos = (int)copy.find(delimiter)) != -1) {
+    substr = copy.substr(0, pos);
+    result.push_back(substr);
+    copy.erase(0, pos + delimiter.length());
+  }
+
+  result.push_back(copy);
+  return result;
+}
