@@ -13,9 +13,14 @@ class Helper {
   static Helper* createHelper();
   static void freeHelper();
 
-  std::vector<std::string> readFileLines(const std::string&);
-  void writeFileLines(const std::vector<std::string>&, const std::string&, bool append = true);
-  std::vector<std::string> splitStringLine(const std::string&, const std::string& delimiter = ",");
+  std::vector<std::string> readFileLines(const std::string&) const;
+  void writeFileLines(const std::vector<std::string>&, const std::string&,
+                      bool append = true) const;
+  std::vector<std::string> splitStringLine(const std::string&,
+                                           const std::string& delimiter = ",") const;
+  int toInt(const std::string&) const;
+  int readInt(const int& min, const int& max) const;
+  int showReadMenu(const std::vector<std::string>&) const;
 };
 
 #endif

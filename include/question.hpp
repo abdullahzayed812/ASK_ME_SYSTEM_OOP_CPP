@@ -1,7 +1,7 @@
 #ifndef QUESTION_H
 #define QUESTION_H 1
 
-#include <cstring>
+#include <string>
 
 class Question {
  private:
@@ -9,10 +9,15 @@ class Question {
   int fromUserId;
   int toUserId;
   int parentQuestionId;
+  bool isAnonymousQuestions;
+
+  std::string questionText;
+  std::string answerText;
 
  public:
   Question();
   Question(std::string);
+
   void printFromQuestion();
   void printToQuestion();
   void printFeedQuestion();

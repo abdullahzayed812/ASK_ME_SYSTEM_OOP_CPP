@@ -3,6 +3,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 Helper* Helper::helper = nullptr;
@@ -28,7 +29,7 @@ void Helper::freeHelper() {
   }
 }
 
-std::vector<std::string> Helper::readFileLines(const std::string& path) {
+std::vector<std::string> Helper::readFileLines(const std::string& path) const {
   std::vector<std::string> lines;
 
   std::fstream fileHandler(path);
@@ -54,7 +55,7 @@ std::vector<std::string> Helper::readFileLines(const std::string& path) {
 }
 
 void Helper::writeFileLines(const std::vector<std::string>& lines, const std::string& filePath,
-                            bool append) {
+                            bool append) const {
   auto status = std::ios::in | std::ios::out | std::ios::app;
 
   if (!append) {
@@ -76,7 +77,7 @@ void Helper::writeFileLines(const std::vector<std::string>& lines, const std::st
 }
 
 std::vector<std::string> Helper::splitStringLine(const std::string& line,
-                                                 const std::string& delimiter) {
+                                                 const std::string& delimiter) const {
   std::string copy = line;
   std::vector<std::string> result;
 
@@ -91,4 +92,39 @@ std::vector<std::string> Helper::splitStringLine(const std::string& line,
 
   result.push_back(copy);
   return result;
+}
+
+int Helper::toInt(const std::string& str) const {
+  std::istringstream iss(str);
+
+  int num;
+  iss >> num;
+
+  return num;
+}
+
+int Helper::readInt(const int& min, const int& max) const {
+  std::cout << "\nEnter number in range " << min << " - " << max << ": ";
+
+  int value;
+  std::cin >> value;
+
+  while (value < min || value > max) {
+    std::cout << "\n\nERROR: Out of range... Try again.\n";
+    std::cout << "\nEnter number in range " << min << " - " << max << ": ";
+
+    std::cin >> value;
+  }
+
+  return value;
+}
+
+int Helper::showReadMenu(const std::vector<std::string>& choices) const {
+  std::cout << "\nMenu:\n";
+
+  for (std::size_t i = 0; i < choices.size(); i++) {
+    std::cout << "\t" << i + 1 << ": " << choices[i] << "\n";
+  }
+
+  return this->readInt(1, choices.size());
 }
