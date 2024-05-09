@@ -41,7 +41,7 @@ void Question::printQuestionToUser() const {
   std::string prefix = "";
 
   if (this->parentQuestionId != -1) {
-    prefix = "Thread";
+    prefix = "Thread--\t ";
   }
 
   std::cout << "Question id ( " << this->questionId << " )";
