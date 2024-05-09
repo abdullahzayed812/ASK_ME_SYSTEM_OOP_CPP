@@ -6,30 +6,9 @@
 #include <sstream>
 #include <vector>
 
-Helper* Helper::helper = nullptr;
-
 Helper::Helper() {}
 
-Helper* Helper::createHelper() {
-  if (Helper::helper == nullptr) {
-    std::cout << "Create new instance from helper class\n";
-
-    Helper::helper = new Helper();
-  }
-
-  return Helper::helper;
-}
-
-void Helper::freeHelper() {
-  if (Helper::helper != nullptr) {
-    delete Helper::helper;
-    Helper::helper = nullptr;
-  } else {
-    std::cout << "Helper already freed\n";
-  }
-}
-
-std::vector<std::string> Helper::readFileLines(const std::string& path) const {
+std::vector<std::string> Helper::readFileLines(const std::string& path) {
   std::vector<std::string> lines;
 
   std::fstream fileHandler(path);
@@ -55,7 +34,7 @@ std::vector<std::string> Helper::readFileLines(const std::string& path) const {
 }
 
 void Helper::writeFileLines(const std::vector<std::string>& lines, const std::string& filePath,
-                            bool append) const {
+                            bool append) {
   auto status = std::ios::in | std::ios::out | std::ios::app;
 
   if (!append) {
@@ -77,7 +56,7 @@ void Helper::writeFileLines(const std::vector<std::string>& lines, const std::st
 }
 
 std::vector<std::string> Helper::splitStringLine(const std::string& line,
-                                                 const std::string& delimiter) const {
+                                                 const std::string& delimiter) {
   std::string copy = line;
   std::vector<std::string> result;
 
@@ -94,7 +73,7 @@ std::vector<std::string> Helper::splitStringLine(const std::string& line,
   return result;
 }
 
-int Helper::toInt(const std::string& str) const {
+int Helper::toInt(const std::string& str) {
   std::istringstream iss(str);
 
   int num;
@@ -103,7 +82,7 @@ int Helper::toInt(const std::string& str) const {
   return num;
 }
 
-int Helper::readInt(const int& min, const int& max) const {
+int Helper::readInt(const int& min, const int& max) {
   std::cout << "\nEnter number in range " << min << " - " << max << ": ";
 
   int value;
@@ -119,12 +98,12 @@ int Helper::readInt(const int& min, const int& max) const {
   return value;
 }
 
-int Helper::showReadMenu(const std::vector<std::string>& choices) const {
+int Helper::showReadMenu(const std::vector<std::string>& choices) {
   std::cout << "\nMenu:\n";
 
   for (std::size_t i = 0; i < choices.size(); i++) {
     std::cout << "\t" << i + 1 << ": " << choices[i] << "\n";
   }
 
-  return this->readInt(1, choices.size());
+  return Helper::readInt(1, choices.size());
 }

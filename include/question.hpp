@@ -9,19 +9,19 @@ class Question {
   int fromUserId;
   int toUserId;
   int parentQuestionId;
-  bool isAnonymousQuestions;
+  int isAnonymousQuestion;
 
   std::string questionText;
   std::string answerText;
 
  public:
   Question();
-  Question(std::string);
+  Question(const std::string&);
 
-  void printFromQuestion();
-  void printToQuestion();
-  void printFeedQuestion();
-  void readQuestion();
+  void printQuestionFromUser() const;
+  void printQuestionToUser() const;
+  void printFeedQuestion() const;
+  const std::string& toString() const;
 };
 
 #endif
