@@ -1,5 +1,7 @@
 #include "../include/question.hpp"
 
+#include <assert.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -10,6 +12,7 @@ Question::Question()
 
 Question::Question(const std::string& line) {
   std::vector<std::string> questionData = Helper::splitStringLine(line);
+  assert(questionData.size() == 7);
 
   this->questionId = Helper::toInt(questionData[0]);
   this->parentQuestionId = Helper::toInt(questionData[1]);
@@ -83,8 +86,8 @@ void Question::printFeedQuestion() const {
 const std::string& Question::toString() const {
   std::ostringstream oss;
 
-  oss << this->questionId << ", " << this->parentQuestionId << ", " << this->fromUserId << ", "
-      << this->toUserId << ", " << this->isAnonymousQuestion << ", " << this->questionText << ", "
+  oss << this->questionId << "," << this->parentQuestionId << "," << this->fromUserId << ","
+      << this->toUserId << "," << this->isAnonymousQuestion << "," << this->questionText << ","
       << this->answerText;
 
   return oss.str();
