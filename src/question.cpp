@@ -92,3 +92,29 @@ const std::string& Question::toString() const {
 
   return oss.str();
 }
+
+const int& Question::getQuestionId() const { return this->questionId; }
+
+const int& Question::getFromUserid() const { return this->fromUserId; }
+
+const int& Question::getToUserId() const { return this->toUserId; }
+
+const int& Question::getParentQuestionId() const { return this->parentQuestionId; }
+
+const int& Question::getIsAnonymousQuestion() const { return this->isAnonymousQuestion; }
+
+const std::string& Question::getQuestionText() const { return this->questionText; }
+
+const std::string& Question::getAnswerText() const { return this->answerText; }
+
+void Question::setQuestionId(const int& questionId) { this->questionId = questionId; }
+void Question::setFromUserId(const int& fromUserId) { this->fromUserId = fromUserId; }
+void Question::setToUserId(const int& toUserId) { this->toUserId = toUserId; }
+void Question::setParentQuestionId(const int& parentQuestionId) {
+  this->parentQuestionId = parentQuestionId;
+}
+void Question::setIsAnonymousQuestion(const int& isAnonymousQuestion) {
+  this->isAnonymousQuestion = isAnonymousQuestion;
+}
+void Question::setQuestionText(const std::string& answerText) { this->questionText = answerText; }
+void Question::setAnswerText(const std::string& questionText) { this->answerText = questionText; }

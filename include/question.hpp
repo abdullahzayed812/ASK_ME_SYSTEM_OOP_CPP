@@ -14,6 +14,22 @@ class Question {
   std::string questionText;
   std::string answerText;
 
+  const int& getQuestionId() const;
+  const int& getFromUserid() const;
+  const int& getToUserId() const;
+  const int& getParentQuestionId() const;
+  const int& getIsAnonymousQuestion() const;
+  const std::string& getQuestionText() const;
+  const std::string& getAnswerText() const;
+
+  void setQuestionId(const int&);
+  void setFromUserId(const int&);
+  void setToUserId(const int&);
+  void setParentQuestionId(const int&);
+  void setIsAnonymousQuestion(const int&);
+  void setQuestionText(const std::string&);
+  void setAnswerText(const std::string&);
+
  public:
   Question();
   Question(const std::string&);
