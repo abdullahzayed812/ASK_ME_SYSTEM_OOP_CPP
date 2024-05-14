@@ -59,6 +59,29 @@ void User::resetQuestionsToUser(const std::vector<std::pair<int, int>>& newQuest
   }
 }
 
+void User::readUser(const std::string& username, const int& userId) {
+  this->setUsername(username);
+  this->setUserId(userId);
+
+  std::string input;
+
+  std::cout << "Enter password: ";
+  std::cin >> input;
+  this->setPassword(input);
+
+  std::cout << "Enter name: ";
+  std::cin >> input;
+  this->setName(input);
+
+  std::cout << "Enter email: ";
+  std::cin >> input;
+  this->setEmail(input);
+
+  std::cout << "Allow anonymous questions? (0 or 1): ";
+  std::cin >> input;
+  this->setAllowAnonymousQuestions(Helper::toInt(input));
+}
+
 const int& User::getUserId() const { return this->userId; }
 
 const std::string& User::getName() const { return this->name; }

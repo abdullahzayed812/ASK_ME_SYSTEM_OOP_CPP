@@ -19,7 +19,6 @@ class User {
   std::vector<int> questionIdsFromUser;
   std::map<int, std::vector<int>> questionIdsToUser;
 
-
  public:
   User();
   User(const std::string&);
@@ -36,8 +35,8 @@ class User {
   const std::string& getUsername() const;
   const std::string& getPassword() const;
   const int& getAllowAnonymousQuestions() const;
-  const std::vector<int>& getQuestionsFromUser() const;
-  const std::map<int, std::vector<int>>& getQuestionsToUser() const;
+  const std::vector<int>& getQuestionsIdsFromUser() const;
+  const std::map<int, std::vector<int>>& getQuestionsIdsToUser() const;
 
   // Setters
   void setUserId(const int&);
