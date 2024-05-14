@@ -58,3 +58,35 @@ void User::resetQuestionsToUser(const std::vector<std::pair<int, int>>& newQuest
     this->questionIdsToUser[(*it).first].push_back((*it).second);
   }
 }
+
+const int& User::getUserId() const { return this->userId; }
+
+const std::string& User::getName() const { return this->name; }
+
+const std::string& User::getEmail() const { return this->email; }
+
+const std::string& User::getUsername() const { return this->username; }
+
+const std::string& User::getPassword() const { return this->password; }
+
+const int& User::getAllowAnonymousQuestions() const { return this->allowAnonymousQuestions; }
+
+const std::vector<int>& User::getQuestionsIdsFromUser() const { return this->questionIdsFromUser; }
+
+const std::map<int, std::vector<int>>& User::getQuestionsIdsToUser() const {
+  return this->questionIdsToUser;
+}
+
+void User::setUserId(const int& userId) { this->userId = userId; }
+
+void User::setName(const std::string& name) { this->name = name; }
+
+void User::setEmail(const std::string& email) { this->email = email; }
+
+void User::setUsername(const std::string& username) { this->username = username; }
+
+void User::setPassword(const std::string& password) { this->password = password; }
+
+void User::setAllowAnonymousQuestions(const int& allowAnonymousQuestion) {
+  this->allowAnonymousQuestions = allowAnonymousQuestion;
+}

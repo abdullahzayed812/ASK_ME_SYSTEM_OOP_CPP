@@ -3,13 +3,6 @@
 #include <vector>
 
 #include "../include/helper.hpp"
+#include "../include/question.hpp"
 
-int main() {
-  Helper* helper = Helper::createHelper();
-
-  helper->showReadMenu({"Learn c++", "Learn Java", "Learn c#", "Learn python"});
-
-  Helper::freeHelper();
-
-  return 0;
-}
+int main() { return 0; }
