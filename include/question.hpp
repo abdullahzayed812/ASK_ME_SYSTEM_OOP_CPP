@@ -14,6 +14,9 @@ class Question {
   std::string questionText;
   std::string answerText;
 
+  mutable std::string cachedString;
+  mutable bool cachedStringNeedsUpdate = true;
+
  public:
   Question();
   Question(const std::string&);

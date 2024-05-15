@@ -3,8 +3,8 @@
 
 #include <util.h>
 
-#include <cstring>
 #include <map>
+#include <string>
 #include <vector>
 
 class User {
@@ -17,7 +17,10 @@ class User {
   int allowAnonymousQuestions;
 
   std::vector<int> questionIdsFromUser;
-  std::map<int, std::vector<int>> questionIdsToUser;
+  std::map<int, std::vector<int>> questionIdsToUserThreadsMap;
+
+  mutable std::string cachedString;
+  mutable bool cachedStringNeedsUpdate = true;
 
  public:
   User();

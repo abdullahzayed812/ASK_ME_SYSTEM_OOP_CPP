@@ -7,7 +7,7 @@
 class Helper {
  public:
   Helper();
-  
+
   static std::vector<std::string> readFileLines(const std::string&);
   static void writeFileLines(const std::vector<std::string>&, const std::string&,
                              bool append = true);

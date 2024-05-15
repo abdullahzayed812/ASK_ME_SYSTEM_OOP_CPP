@@ -84,13 +84,17 @@ void Question::printFeedQuestion() const {
 }
 
 const std::string& Question::toString() const {
-  std::ostringstream oss;
+  if (this->cachedStringNeedsUpdate) {
+    std::ostringstream oss;
 
-  oss << this->questionId << "," << this->parentQuestionId << "," << this->fromUserId << ","
-      << this->toUserId << "," << this->isAnonymousQuestion << "," << this->questionText << ","
-      << this->answerText;
+    oss << this->questionId << "," << this->parentQuestionId << "," << this->fromUserId << ","
+        << this->toUserId << "," << this->isAnonymousQuestion << "," << this->questionText << ","
+        << this->answerText;
 
-  return oss.str();
+    this->cachedString = oss.str();
+    this->cachedStringNeedsUpdate = false;
+  }
+  return this->cachedString;
 }
 
 const int& Question::getQuestionId() const { return this->questionId; }

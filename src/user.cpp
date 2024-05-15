@@ -26,12 +26,17 @@ User::User(const std::string& line) {
 }
 
 const std::string& User::toString() const {
-  std::ostringstream oss;
+  if (this->cachedStringNeedsUpdate) {
+    std::ostringstream oss;
 
-  oss << this->userId << "," << this->name << "," << this->password << "," << this->username << ","
-      << this->email << "," << this->allowAnonymousQuestions;
+    oss << this->userId << "," << this->name << "," << this->password << "," << this->username
+        << "," << this->email << "," << this->allowAnonymousQuestions;
 
-  return oss.str();
+    this->cachedString = oss.str();
+    this->cachedStringNeedsUpdate = false;
+  }
+
+  return this->cachedString;
 }
 
 void User::print() const {
@@ -50,12 +55,12 @@ void User::resetQuestionsFromUser(const std::vector<int>& newQuestions) {
 }
 
 void User::resetQuestionsToUser(const std::vector<std::pair<int, int>>& newQuestionsPair) {
-  this->questionIdsToUser.clear();
+  this->questionIdsToUserThreadsMap.clear();
 
   std::vector<std::pair<int, int>>::const_iterator it;
 
   for (it = newQuestionsPair.begin(); it != newQuestionsPair.end(); it++) {
-    this->questionIdsToUser[(*it).first].push_back((*it).second);
+    this->questionIdsToUserThreadsMap[(*it).first].push_back((*it).second);
   }
 }
 
@@ -97,7 +102,7 @@ const int& User::getAllowAnonymousQuestions() const { return this->allowAnonymou
 const std::vector<int>& User::getQuestionsIdsFromUser() const { return this->questionIdsFromUser; }
 
 const std::map<int, std::vector<int>>& User::getQuestionsIdsToUser() const {
-  return this->questionIdsToUser;
+  return this->questionIdsToUserThreadsMap;
 }
 
 void User::setUserId(const int& userId) { this->userId = userId; }
