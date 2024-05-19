@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "question.hpp"
+#include "user.hpp"
 
 class QuestionsManager {
  private:
@@ -16,6 +17,8 @@ class QuestionsManager {
  public:
   QuestionsManager();
   void loadDatabase();
+  std::vector<int> getQuestionsIdsFromUser(const User&) const;
+  std::vector<std::pair<int, int>> getQuestionsIdsToUser(const User&) const;
 };
 
 #endif

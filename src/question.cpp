@@ -99,7 +99,7 @@ const std::string& Question::toString() const {
 
 const int& Question::getQuestionId() const { return this->questionId; }
 
-const int& Question::getFromUserid() const { return this->fromUserId; }
+const int& Question::getFromUserId() const { return this->fromUserId; }
 
 const int& Question::getToUserId() const { return this->toUserId; }
 

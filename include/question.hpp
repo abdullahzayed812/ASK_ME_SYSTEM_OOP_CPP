@@ -28,7 +28,7 @@ class Question {
 
   // Getters
   const int& getQuestionId() const;
-  const int& getFromUserid() const;
+  const int& getFromUserId() const;
   const int& getToUserId() const;
   const int& getParentQuestionId() const;
   const int& getIsAnonymousQuestion() const;
