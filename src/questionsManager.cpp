@@ -71,3 +71,91 @@ std::vector<std::pair<int, int>> QuestionsManager::getQuestionsIdsToUser(const U
 
   return questionsIdsToUser;
 }
+
+void QuestionsManager::printQuestionsToUser(const User& user) const {
+  std::cout << "\n";
+
+  const std::map<int, std::vector<int>>& questionIdsToUser = user.getQuestionsIdsToUser();
+
+  if (questionIdsToUser.size() == 0) {
+    std::cout << "No Questions\n";
+  }
+
+  for (const std::pair<int, std::vector<int>> pair : questionIdsToUser) {
+    for (const int& questionId : pair.second) {
+      const Question& question = this->questionsMap.find(questionId)->second;
+
+      question.printQuestionToUser();
+    }
+  }
+
+  std::cout << "\n";
+}
+
+void QuestionsManager::printQuestionsFromUser(const User& user) const {
+  std::cout << "\n";
+
+  const std::vector<int>& questionIdsFromUser = user.getQuestionsIdsFromUser();
+
+  if (questionIdsFromUser.size() == 0) {
+    std::cout << "No Questions\n";
+  }
+
+  for (const int& questionId : questionIdsFromUser) {
+    const Question& question = this->questionsMap.find(questionId)->second;
+
+    question.printQuestionFromUser();
+  }
+
+  std::cout << "\n";
+}
+
+// Used in Answering a question for YOU.
+// It can be any of your questions (thread or not)
+int QuestionsManager::readAnyQuestionId(const User& user) const {
+  int questionId;
+
+  std::cout << "Enter Question id or -1 to cancel: ";
+  std::cin >> questionId;
+
+  if (questionId == -1) {
+    return -1;
+  }
+
+  while (!this->questionsMap.count(questionId)) {
+    std::cout << "\nERROR: No question with such id, try again\n\n";
+    std::cout << "Enter Question id or -1 to cancel: ";
+    std::cin >> questionId;
+
+    if (this->questionsMap.count(questionId)) {
+      const Question& question = this->questionsMap.find(questionId)->second;
+
+      if (question.getToUserId() != user.getUserId()) {
+        continue;
+      } else {
+        break;
+      }
+    }
+  }
+
+  return questionId;
+}
+
+int QuestionsManager::readyThreadQuestionId(const User& user) const {
+  int questionId;
+
+  std::cout << "For thread question: Enter questions id or -1 to cancel: ";
+  std::cin >> questionId;
+
+  if (questionId == -1) {
+    return -1;
+  }
+
+  while (!this->questionsThreadsMap.count(questionId)) {
+    std::cout << "\nERROR: No thread question with such id, try again\n\n";
+    std::cout << "For thread question: Enter questions id or -1 to cancel: ";
+    std::cin >> questionId;
+  }
+
+  return questionId;
+}

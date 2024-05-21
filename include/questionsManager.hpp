@@ -19,6 +19,10 @@ class QuestionsManager {
   void loadDatabase();
   std::vector<int> getQuestionsIdsFromUser(const User&) const;
   std::vector<std::pair<int, int>> getQuestionsIdsToUser(const User&) const;
+  void printQuestionsToUser(const User&) const;
+  void printQuestionsFromUser(const User&) const;
+  int readAnyQuestionId(const User& user) const;
+  int readyThreadQuestionId(const User& user) const;
 };
 
 #endif
