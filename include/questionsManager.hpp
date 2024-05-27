@@ -25,6 +25,7 @@ class QuestionsManager {
   int readyThreadQuestionId(const User&) const;
   void answerQuestion(const User&);
   void deleteQuestion(const User&);
+  void askQuestion(const User& user, const std::pair<int, int>&);
 };
 
 #endif

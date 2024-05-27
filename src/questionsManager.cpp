@@ -213,3 +213,44 @@ void QuestionsManager::deleteQuestion(const User& user) {
     this->questionsMap.erase(id);
   }
 }
+
+void QuestionsManager::askQuestion(const User& user, const std::pair<int, int>& toUserPair) {
+  Question question;
+
+  if (!toUserPair.second) {
+    std::cout << "Note: Anonymous questions not allowed for this user\n";
+
+    question.setIsAnonymousQuestion(0);
+  } else {
+    int status;
+
+    std::cout << "Allow anonymous question or not (1 - 0): ";
+    std::cin >> status;
+
+    question.setIsAnonymousQuestion(status);
+  }
+
+  question.setParentQuestionId(this->readyThreadQuestionId(user));
+
+  std::string questionText;
+
+  std::cout << "Enter question text: ";
+  std::getline(std::cin, questionText);
+  std::getline(std::cin, questionText);
+
+  question.setQuestionText(questionText);
+  question.setToUserId(toUserPair.first);
+  question.setFromUserId(user.getUserId());
+  question.setQuestionId(++this->lastId);
+
+  const int& questionId = question.getQuestionId();
+  const int& parentQuestionId = question.getParentQuestionId();
+
+  this->questionsMap[questionId] = question;
+
+  if (parentQuestionId == -1) {
+    this->questionsThreadsMap[questionId].push_back(questionId);
+  } else {
+    this->questionsThreadsMap[parentQuestionId].push_back(questionId);
+  }
+}
