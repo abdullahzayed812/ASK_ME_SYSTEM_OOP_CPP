@@ -1,11 +1,11 @@
 #ifndef USER_H
 #define USER_H 1
 
-#include <util.h>
-
 #include <map>
 #include <string>
 #include <vector>
+
+#include "utility"
 
 class User {
  private:

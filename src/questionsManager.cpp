@@ -59,11 +59,9 @@ std::vector<std::pair<int, int>> QuestionsManager::getQuestionsIdsToUser(const U
 
       if (question.getToUserId() == user.getUserId()) {
         if (question.getParentQuestionId() == -1) {
-          questionsIdsToUser.push_back(
-              std::make_pair(question.getQuestionId(), question.getQuestionId()));
+          questionsIdsToUser.push_back(std::make_pair(question.getQuestionId(), question.getQuestionId()));
         } else {
-          questionsIdsToUser.push_back(
-              std::make_pair(question.getParentQuestionId(), question.getQuestionId()));
+          questionsIdsToUser.push_back(std::make_pair(question.getParentQuestionId(), question.getQuestionId()));
         }
       }
     }
@@ -81,7 +79,7 @@ void QuestionsManager::printQuestionsToUser(const User& user) const {
     std::cout << "No Questions\n";
   }
 
-  for (const std::pair<int, std::vector<int>> pair : questionIdsToUser) {
+  for (const std::pair<int, std::vector<int>>& pair : questionIdsToUser) {
     for (const int& questionId : pair.second) {
       const Question& question = this->questionsMap.find(questionId)->second;
 
@@ -158,4 +156,60 @@ int QuestionsManager::readyThreadQuestionId(const User& user) const {
   }
 
   return questionId;
+}
+
+void QuestionsManager::answerQuestion(const User& user) {
+  int questionId = this->readAnyQuestionId(user);
+
+  if (questionId == -1) {
+    return;
+  }
+
+  Question& question = this->questionsMap.find(questionId)->second;
+
+  question.printQuestionToUser();
+
+  if (question.getAnswerText() != "") {
+    std::cout << "\nWARNING: Already answered, answer will be updated\n";
+  }
+
+  std::cout << "Enter answer: ";
+
+  std::string line;
+  std::getline(std::cin, line);
+  std::getline(std::cin, line);
+
+  question.setAnswerText(line);
+}
+
+void QuestionsManager::deleteQuestion(const User& user) {
+  int questionId = this->readAnyQuestionId(user);
+
+  if (questionId == -1) {
+    return;
+  }
+
+  std::vector<int> questionIdsToRemove;
+
+  if (this->questionsThreadsMap.count(questionId)) {
+    questionIdsToRemove = this->questionsThreadsMap[questionId];
+    this->questionsThreadsMap.erase(questionId);
+  } else {
+    questionIdsToRemove.push_back(questionId);
+
+    for (std::pair<const int, std::vector<int>>& pair : this->questionsThreadsMap) {
+      std::vector<int>& ids = pair.second;
+
+      for (int i = 0; i < ids.size(); i++) {
+        if (questionId == ids[i]) {
+          ids.erase(ids.begin() + i);
+          break;
+        }
+      }
+    }
+  }
+
+  for (const int& id : questionIdsToRemove) {
+    this->questionsMap.erase(id);
+  }
 }

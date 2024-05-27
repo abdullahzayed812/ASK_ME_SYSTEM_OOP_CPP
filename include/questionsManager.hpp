@@ -21,8 +21,10 @@ class QuestionsManager {
   std::vector<std::pair<int, int>> getQuestionsIdsToUser(const User&) const;
   void printQuestionsToUser(const User&) const;
   void printQuestionsFromUser(const User&) const;
-  int readAnyQuestionId(const User& user) const;
-  int readyThreadQuestionId(const User& user) const;
+  int readAnyQuestionId(const User&) const;
+  int readyThreadQuestionId(const User&) const;
+  void answerQuestion(const User&);
+  void deleteQuestion(const User&);
 };
 
 #endif
