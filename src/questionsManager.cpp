@@ -254,3 +254,25 @@ void QuestionsManager::askQuestion(const User& user, const std::pair<int, int>& 
     this->questionsThreadsMap[parentQuestionId].push_back(questionId);
   }
 }
+
+void QuestionsManager::listFeed() const {
+  for (const std::pair<int, Question>& pair : this->questionsMap) {
+    const Question& question = pair.second;
+
+    if (question.getQuestionText() == "") {
+      continue;
+    }
+
+    question.printFeedQuestion();
+  }
+}
+
+void QuestionsManager::updateDatabase() const {
+  std::vector<std::string> lines;
+
+  for (const std::pair<int, Question>& pair : this->questionsMap) {
+    lines.push_back(pair.second.toString());
+  }
+
+  Helper::writeFileLines(lines, "database/questions.txt", false);
+}

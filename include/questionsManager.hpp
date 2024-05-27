@@ -26,6 +26,8 @@ class QuestionsManager {
   void answerQuestion(const User&);
   void deleteQuestion(const User&);
   void askQuestion(const User& user, const std::pair<int, int>&);
+  void listFeed() const;
+  void updateDatabase() const;
 };
 
 #endif
