@@ -236,7 +236,6 @@ void QuestionsManager::askQuestion(const User& user, const std::pair<int, int>& 
 
   std::cout << "Enter question text: ";
   std::getline(std::cin, questionText);
-  std::getline(std::cin, questionText);
 
   question.setQuestionText(questionText);
   question.setToUserId(toUserPair.first);
@@ -274,5 +273,5 @@ void QuestionsManager::updateDatabase() const {
     lines.push_back(pair.second.toString());
   }
 
-  Helper::writeFileLines(lines, "database/questions.txt", false);
+  Helper::writeFileLines("database/questions.txt", lines, false);
 }

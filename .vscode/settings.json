@@ -66,6 +66,14 @@
     "variant": "cpp",
     "vector": "cpp",
     "algorithm": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "bit": "cpp",
+    "*.tcc": "cpp",
+    "functional": "cpp",
+    "iterator": "cpp",
+    "memory_resource": "cpp",
+    "numeric": "cpp",
+    "random": "cpp",
+    "numbers": "cpp"
   }
 }

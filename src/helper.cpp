@@ -33,8 +33,7 @@ std::vector<std::string> Helper::readFileLines(const std::string& path) {
   return lines;
 }
 
-void Helper::writeFileLines(const std::vector<std::string>& lines, const std::string& filePath,
-                            bool append) {
+void Helper::writeFileLines(const std::string& filePath, const std::vector<std::string>& lines, bool append) {
   auto status = std::ios::in | std::ios::out | std::ios::app;
 
   if (!append) {
@@ -55,8 +54,7 @@ void Helper::writeFileLines(const std::vector<std::string>& lines, const std::st
   fileHandler.close();
 }
 
-std::vector<std::string> Helper::splitStringLine(const std::string& line,
-                                                 const std::string& delimiter) {
+std::vector<std::string> Helper::splitStringLine(const std::string& line, const std::string& delimiter) {
   std::string copy = line;
   std::vector<std::string> result;
 

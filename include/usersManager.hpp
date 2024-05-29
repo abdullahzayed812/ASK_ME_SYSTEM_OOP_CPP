@@ -5,13 +5,17 @@
 
 class UsersManager {
  private:
+  std::map<std::string, User> usersMap;
   User currentUser;
   int lastId;
 
  public:
+  UsersManager();
+  void loadDatabase();
+  void accessSystem();
   void login();
   void signUp();
-  void loadUsers();
+  void updateDatabase(const User&);
 };
 
 #endif

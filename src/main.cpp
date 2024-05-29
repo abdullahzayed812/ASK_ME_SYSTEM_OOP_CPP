@@ -6,10 +6,11 @@
 #include "../include/question.hpp"
 
 int main() {
-  std::vector<std::string> lines = Helper::readFileLines("database/questions.txt");
+  std::string line;
+  std::getline(std::cin, line);
+  std::getline(std::cin, line);
 
-  for (auto line : lines) {
-    std::cout << line << "\n";
-  }
+  std::cout << line << "\n";
+
   return 0;
 }
