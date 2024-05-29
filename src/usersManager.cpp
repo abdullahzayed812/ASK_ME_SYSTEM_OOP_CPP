@@ -91,3 +91,39 @@ void UsersManager::updateDatabase(const User& newUser) {
 
   Helper::writeFileLines("database/users.txt", lines);
 }
+
+void UsersManager::resetQuestionsToUser(const std::vector<std::pair<int, int>>& questionsToUser) {
+  this->currentUser.resetQuestionsToUser(questionsToUser);
+}
+
+void UsersManager::resetQuestionsFromUser(const std::vector<int>& questionsFromUser) {
+  this->currentUser.resetQuestionsFromUser(questionsFromUser);
+}
+
+void UsersManager::listUsersNamesIds() const {
+  for (const std::pair<std::string, User>& pair : this->usersMap) {
+    std::cout << "ID: " << pair.second.getUserId() << "\t\tName: " << pair.second.getUsername() << "\n";
+  }
+}
+
+const User& UsersManager::getCurrentUser() const { return this->currentUser; }
+
+std::pair<int, int> UsersManager::readUserId() const {
+  int userId;
+
+  std::cout << "Enter user id or -1 to cancel: ";
+  std::cin >> userId;
+
+  if (userId == -1) {
+    std::make_pair(-1, -1);
+  }
+
+  for (const std::pair<std::string, User>& pair : this->usersMap) {
+    if (pair.second.getUserId() == userId) {
+      return std::make_pair(userId, pair.second.getAllowAnonymousQuestions());
+    }
+  }
+
+  std::cout << "Invalid user id, try again.\n";
+  this->getCurrentUser();
+}

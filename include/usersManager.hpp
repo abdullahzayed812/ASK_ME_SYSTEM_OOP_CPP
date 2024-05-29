@@ -16,6 +16,11 @@ class UsersManager {
   void login();
   void signUp();
   void updateDatabase(const User&);
+  void resetQuestionsToUser(const std::vector<std::pair<int, int>>&);
+  void resetQuestionsFromUser(const std::vector<int>&);
+  void listUsersNamesIds() const;
+  const User& getCurrentUser() const;
+  std::pair<int, int> readUserId() const;
 };
 
 #endif
