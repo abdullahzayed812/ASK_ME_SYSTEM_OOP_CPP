@@ -10,7 +10,9 @@ class AskSystem {
   QuestionsManager questionsManager;
 
  public:
-  void loadDatabase();
+  void loadDatabase(bool fillUserQuestions = false);
+  void resetCurrentUserQuestions();
+  void run();
 };
 
 #endif

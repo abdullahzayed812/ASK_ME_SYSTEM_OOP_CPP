@@ -41,7 +41,9 @@ void UsersManager::login() {
     std::string password;
 
     std::cout << "Enter username: ";
-    std::getline(std::cin, username);
+    std::cin >> username;
+    // std::getline(std::cin, username);
+    // std::getline(std::cin, username);
     std::cout << "Enter password: ";
     std::cin >> password;
 
@@ -111,19 +113,20 @@ const User& UsersManager::getCurrentUser() const { return this->currentUser; }
 std::pair<int, int> UsersManager::readUserId() const {
   int userId;
 
-  std::cout << "Enter user id or -1 to cancel: ";
-  std::cin >> userId;
+  while (true) {
+    std::cout << "Enter user id or -1 to cancel: ";
+    std::cin >> userId;
 
-  if (userId == -1) {
-    std::make_pair(-1, -1);
-  }
-
-  for (const std::pair<std::string, User>& pair : this->usersMap) {
-    if (pair.second.getUserId() == userId) {
-      return std::make_pair(userId, pair.second.getAllowAnonymousQuestions());
+    if (userId == -1) {
+      return std::make_pair(-1, -1);
     }
-  }
 
-  std::cout << "Invalid user id, try again.\n";
-  this->getCurrentUser();
+    for (const std::pair<std::string, User>& pair : this->usersMap) {
+      if (pair.second.getUserId() == userId) {
+        return std::make_pair(userId, pair.second.getAllowAnonymousQuestions());
+      }
+    }
+
+    std::cout << "\nInvalid user id, try again.\n";
+  }
 }
